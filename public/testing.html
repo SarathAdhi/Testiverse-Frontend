@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>This is an example HTML file with embedded IFrame</h1>
+
+    <p>?theme=[dark | light]</p>
+
+    <input id="input" value="?theme=light" />
+    <button id="button">Submit</button>
+
+    <br />
+    <br />
+
+    <iframe
+      id="embeddedIframe"
+      src="/embed/123"
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+      height="400"
+    ></iframe>
+
+    <script
+      id="my-script"
+      type="text/javascript"
+      src="/script/resize-iframe.min.js"
+    ></script>
+
+    <script>
+      const input = document.getElementById("input");
+      const button = document.getElementById("button");
+      const embeddedIframe = document.getElementById("embeddedIframe");
+
+      button.addEventListener("click", (e) => {
+        embeddedIframe.setAttribute("src", "/embed/123" + input.value);
+      });
+    </script>
+
+    <!-- <script
+      type="text/javascript"
+      src="https://testimonial.to/js/iframeResizer.min.js"
+    ></script>
+    <iframe
+      id="testimonialto-wall-of-love-for-testimonial-light"
+      src="https://embed-v2.testimonial.to/w/wall-of-love-for-testimonial?theme=light&card=base"
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+    ></iframe>
+    <script type="text/javascript">
+      iFrameResize(
+        { log: false, checkOrigin: false },
+        "#testimonialto-wall-of-love-for-testimonial-light"
+      );
+    </script> -->
+  </body>
+</html>
