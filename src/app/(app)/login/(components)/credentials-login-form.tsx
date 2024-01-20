@@ -34,6 +34,7 @@ const CredentialsLoginForm = () => {
         label="Email address"
         type="email"
         name="email"
+        required
       />
 
       <Input
@@ -41,6 +42,7 @@ const CredentialsLoginForm = () => {
         label="Password"
         type="password"
         name="password"
+        required
       />
 
       <Button type="submit">Sign in</Button>

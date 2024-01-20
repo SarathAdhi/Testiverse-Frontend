@@ -30,13 +30,19 @@ const CredentialsRegisterForm = () => {
 
   return (
     <form className="w-full grid gap-4" onSubmit={handleSubmit(handleLogin)}>
-      <Input {...register("username")} label="Username" name="username" />
+      <Input
+        {...register("username")}
+        label="Username"
+        name="username"
+        required
+      />
 
       <Input
         {...register("email")}
         label="Email address"
         type="email"
         name="email"
+        required
       />
 
       <Input
@@ -44,6 +50,7 @@ const CredentialsRegisterForm = () => {
         label="Password"
         type="password"
         name="password"
+        required
       />
 
       <Button type="submit">Register</Button>
