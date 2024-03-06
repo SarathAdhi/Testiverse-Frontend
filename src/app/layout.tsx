@@ -1,9 +1,17 @@
+import { cn } from "@utils/cn";
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 import "./globals.css";
 
-const myFont = localFont({
-  src: "./fonts/Satoshi-Variable.woff2",
+const headingFont = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--heading-font",
+  display: "swap",
+});
+
+const regularFont = DM_Sans({
+  subsets: ["latin"],
+  variable: "--regular-font",
   display: "swap",
 });
 
@@ -18,7 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={myFont.className}>
+    <html
+      lang="en"
+      className={cn(headingFont.variable, regularFont.variable)}
+      suppressHydrationWarning
+    >
       {children}
     </html>
   );

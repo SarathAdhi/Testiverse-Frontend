@@ -1,4 +1,7 @@
 import Navbar from "@components/navbar";
+import NextThemeProviders from "@components/theme-providers";
+import { cn } from "@utils/cn";
+import { Toaster } from "react-hot-toast";
 import "./app-global.css";
 
 export default function RootLayout({
@@ -7,10 +10,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <body className="container flex flex-col min-h-screen bg-slate-50">
-      <Navbar />
+    <body className={cn("flex flex-col min-h-screen bg-background")}>
+      <NextThemeProviders>
+        <Navbar />
 
-      <main className="py-4 w-full flex-1 flex flex-col">{children}</main>
+        <main className="w-full flex-1 flex flex-col">{children}</main>
+      </NextThemeProviders>
+
+      <Toaster position="top-center" reverseOrder={false} />
     </body>
   );
 }

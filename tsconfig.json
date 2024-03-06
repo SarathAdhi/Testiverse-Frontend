@@ -22,7 +22,7 @@
       "@styles/*": ["styles/*"],
       "@lib/*": ["lib/*"],
       "@utils/*": ["utils/*"],
-      "@layouts/*": ["layouts/*"],
+      "@schemas/*": ["schemas/*"],
       "@ui/*": ["components/ui/*"],
       "@components/*": ["components/*"],
       "@hooks/*": ["hooks/*"],

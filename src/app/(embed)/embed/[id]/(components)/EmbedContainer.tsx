@@ -1,17 +1,21 @@
 "use client";
 
+import { TestimonialTypeMongo } from "@schemas/testimonialSchema";
+import { Rating, ThinRoundedStar } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 import { cn } from "@utils/cn";
-import { testimonials } from "data/testimonials";
-import React, { useEffect } from "react";
+import Image from "next/image";
+import { useEffect } from "react";
 
 type Props = {
   id: string;
   searchParams: {
     theme?: string;
   };
+  testimonials: TestimonialTypeMongo[];
 };
 
-const EmbedContainer = ({ id, searchParams }: Props) => {
+const EmbedContainer = ({ id, searchParams, testimonials }: Props) => {
   const theme = searchParams?.theme || "light";
 
   useEffect(() => {
@@ -34,49 +38,80 @@ const EmbedContainer = ({ id, searchParams }: Props) => {
   }, []);
 
   return (
-    <section className={theme}>
-      <div className="grid gap-4 p-2 dark:bg-black dark:text-white">
-        <h1>ID: {id}</h1>
-
+    <section>
+      <div className="grid gap-4 p-2">
         <div className="sm:columns-2 lg:columns-3 space-y-4">
-          {testimonials.map(({ user, source, testimonial }, index) => (
-            <div
-              key={index}
-              className="grid gap-4 rounded-lg border dark:border-gray-600 p-4 overflow-hidden shadow-lg dark:shadow-md dark:shadow-gray-900"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <img className="w-10 h-10 rounded-full" src={user.image} />
+          {testimonials.map(
+            ({
+              _id,
+              type,
+              rating,
+              text,
+              file,
+              user,
+              customFields,
+              createdAt,
+            }) => (
+              <div
+                key={_id}
+                className={cn(
+                  "overflow-hidden w-full relative p-4 flex flex-col gap-4 border rounded-lg duration-200 hover:bg-primary/[0.05]"
+                )}
+              >
+                {user && (
+                  <div className="flex-shrink-0 flex items-center gap-2">
+                    {user?.image && (
+                      <div>
+                        <Image
+                          width={100}
+                          height={100}
+                          className="flex-shrink-0 w-12 h-12 rounded-full"
+                          src={user.image}
+                          alt={user.name}
+                          draggable={false}
+                        />
+                      </div>
+                    )}
 
-                  <div>
-                    <h5>{user.name}</h5>
-                    <p className="lowercase">@{user.name.replace(" ", "")}</p>
+                    <div className="grid gap-1">
+                      <p className="font-medium leading-none">{user?.name}</p>
+
+                      {/* <a
+                        className="text-sm leading-none underline"
+                        href={`mailto:${user?.email}`}
+                      >
+                        {user?.email}
+                      </a> */}
+                    </div>
                   </div>
-                </div>
-
-                <p>
-                  {source === "twitter" && (
-                    <img
-                      className="w-6 h-6 rounded-full"
-                      src="https://static.vecteezy.com/system/resources/previews/016/716/467/non_2x/twitter-icon-free-png.png"
-                    />
-                  )}
-                </p>
-              </div>
-
-              <div className="grid gap-4">
-                <p className="whitespace-pre-wrap">{testimonial.content}</p>
-
-                {testimonial.images && (
-                  <img src={testimonial.images} className="rounded-lg" />
                 )}
 
-                <p className="text-gray-500 dark:text-gray-400 font-medium">
-                  {testimonial.date}
-                </p>
+                <div className="grid gap-2">
+                  <Rating
+                    className="max-w-40"
+                    value={parseInt(rating!)}
+                    itemStyles={{
+                      itemShapes: ThinRoundedStar,
+                      activeFillColor: "#f59e0b",
+                      inactiveFillColor: "#ffedd5",
+                      inactiveStrokeColor: "#f59e0b",
+                      itemStrokeWidth: 1,
+                    }}
+                    readOnly
+                  />
+
+                  {type === "text" ? (
+                    <p>{text}</p>
+                  ) : (
+                    <video className="w-full rounded-lg" controls>
+                      <source src={file} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
         </div>
       </div>
     </section>

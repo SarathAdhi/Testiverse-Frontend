@@ -1,15 +1,23 @@
-import React from "react";
+import { fetchUser } from "@lib/fetch-user";
+import Link from "next/link";
 import ActionButton from "./action-button";
-import { getServerSession } from "next-auth";
 
-const Navbar = async () => {
-  const session = await getServerSession();
+const Navbar = async ({ isShowcasePage = false }) => {
+  const user = await fetchUser();
 
   return (
-    <header className="sticky top-0 py-4 flex items-center justify-between">
-      <h3>Testiverse</h3>
+    <header className="z-50 sticky top-0 bg-background border-b">
+      <div className="container pd flex items-center justify-between">
+        <Link href="/">
+          <h4>Testiverse</h4>
+        </Link>
 
-      <ActionButton user={session?.user} />
+        {!isShowcasePage && (
+          <>
+            <ActionButton user={user} />
+          </>
+        )}
+      </div>
     </header>
   );
 };
