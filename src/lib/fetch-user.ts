@@ -5,5 +5,5 @@ export async function fetchUser() {
   return fetchFunc
     .get("/auth/verify")
     .then((res) => res.data as User)
-    .catch(() => null);
+    .catch(() => undefined);
 }
