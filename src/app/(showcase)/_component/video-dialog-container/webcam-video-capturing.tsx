@@ -35,7 +35,7 @@ const WebcamVideoRecorder = ({ webcamRef }: Props) => {
         (device) => device.kind === "videoinput"
       );
       setCameras(videoDevices);
-      setSelectedCamera(videoDevices?.[0] || null);
+      setSelectedCamera(videoDevices?.[0] || undefined);
     } catch (error) {
       console.error("Error enumerating devices:", error);
     }
@@ -48,7 +48,7 @@ const WebcamVideoRecorder = ({ webcamRef }: Props) => {
         (device) => device.kind === "audioinput"
       );
       setAudioInputs(audioInputDevices);
-      setSelectedAudioInput(audioInputDevices[0] || null);
+      setSelectedAudioInput(audioInputDevices[0] || undefined);
     } catch (error) {
       console.error("Error enumerating audio devices:", error);
     }

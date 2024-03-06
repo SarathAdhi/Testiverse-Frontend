@@ -27,7 +27,7 @@ type Props = {
   type: string;
   view: string;
   testimonials: TestimonialTypeMongo[];
-  testimonial: TestimonialTypeMongo | null;
+  testimonial: TestimonialTypeMongo | undefined;
   isDrawerOpened: boolean;
   startUrl: string;
 };

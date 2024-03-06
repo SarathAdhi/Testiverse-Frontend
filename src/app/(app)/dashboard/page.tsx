@@ -15,24 +15,16 @@ type Showcase = ShowcaseTypeMongo & {
 };
 
 const DashboardPage = async () => {
-  let showcases: Showcase[] | null = null;
-  let testimonials: TestimonialTypeMongo[] | null = null;
+  let showcases: Showcase[] | undefined = undefined;
+  let testimonials: TestimonialTypeMongo[] | undefined = undefined;
 
-  try {
-    const [_showcases, _testimonials] = await Promise.all<
-      [Showcase[], TestimonialTypeMongo[]]
-    >([
-      await fetchFunc.get("/showcase/my"),
-      await fetchFunc.get("/testimonial/all"),
-    ]);
+  const [{ data: _showcases }, { data: _testimonials }] = await Promise.all([
+    await fetchFunc.get<Showcase[]>("/showcase/my"),
+    await fetchFunc.get<TestimonialTypeMongo[]>("/testimonial/all"),
+  ]);
 
-    showcases = _showcases;
-    testimonials = _testimonials;
-  } catch (error) {
-    console.log(error);
-  }
-
-  console.log(showcases);
+  showcases = _showcases;
+  testimonials = _testimonials;
 
   const videoTestimonials = testimonials?.filter((e) => e.type === "video");
   const textTestimonials = testimonials?.filter((e) => e.type === "text");

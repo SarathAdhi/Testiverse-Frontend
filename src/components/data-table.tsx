@@ -135,7 +135,7 @@ export const DataTable = ({ columns, data, TopActionButtons }: Props) => {
                   return (
                     <TableHead key={header.id} className="whitespace-nowrap">
                       {header.isPlaceholder
-                        ? null
+                        ? undefined
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext()

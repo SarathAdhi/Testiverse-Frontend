@@ -16,18 +16,13 @@ type Props = {
 const ViewEmbededPage = async ({ params, searchParams }: Props) => {
   const slug = params.id;
 
-  let testimonials: TestimonialTypeMongo[] = [];
-  let error;
+  const { data: testimonials, error } = await fetchFunc.get<
+    TestimonialTypeMongo[]
+  >(`/testimonial/${slug}/all`, {
+    cache: "no-store",
+  });
 
-  try {
-    testimonials = await fetchFunc.get(`/testimonial/${slug}/all`, {
-      cache: "no-store",
-    });
-  } catch (_error) {
-    error = (_error as { message: string })?.message || (_error as string);
-  }
-
-  if (error) return <NotFoundPage reason={error} />;
+  if (!testimonials) return <NotFoundPage reason={error} />;
 
   return (
     <NextThemeProviders forcedTheme={searchParams?.theme || "light"}>

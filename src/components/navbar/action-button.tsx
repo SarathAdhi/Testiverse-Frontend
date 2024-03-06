@@ -19,7 +19,7 @@ import type { User as UserType } from "types/user";
 import ThemeButton from "./theme-button";
 
 type Props = {
-  user: UserType | null;
+  user: UserType | undefined;
 };
 
 const ActionButton = ({ user }: Props) => {

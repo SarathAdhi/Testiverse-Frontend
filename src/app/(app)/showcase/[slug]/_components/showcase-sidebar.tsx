@@ -28,19 +28,19 @@ const sideBarLinks = [
       {
         name: "All",
         key: "all",
-        href: null,
+        href: undefined,
         Icon: <div className="bg-gray-500 w-2 h-2 mr-2 rounded-full" />,
       },
       {
         name: "Text",
         key: "text",
-        href: null,
+        href: undefined,
         Icon: <div className="bg-purple-500 w-2 h-2 mr-2 rounded-full" />,
       },
       {
         name: "Video",
         key: "video",
-        href: null,
+        href: undefined,
         Icon: <div className="bg-orange-500 w-2 h-2 mr-2 rounded-full" />,
       },
     ],

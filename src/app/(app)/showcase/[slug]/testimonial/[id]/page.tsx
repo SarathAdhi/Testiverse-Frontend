@@ -11,18 +11,13 @@ type Props = {
 const ViewTestimonial = async ({ params }: Props) => {
   const testimonial_id = params?.id;
 
-  let testimonial: TestimonialTypeMongo | null = null;
-
-  let error;
-
-  try {
-    testimonial = await fetchFunc.get(`/testimonial/${testimonial_id}`, {
-      cache: "no-store",
-    });
-  } catch (_error) {
-    console.log(_error);
-    error = (_error as { message: string })?.message || (_error as string);
-  }
+  const { data: testimonial, error } =
+    await fetchFunc.get<TestimonialTypeMongo>(
+      `/testimonial/${testimonial_id}`,
+      {
+        cache: "no-store",
+      }
+    );
 
   if (!testimonial || error) return <NotFoundPage reason={error} />;
 

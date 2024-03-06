@@ -61,17 +61,17 @@ export default async function Home() {
           </h2>
 
           <p className="text-lg leading-snug">
-            Discover the Testiverse advantage and elevate your credibility with
-            an abundance of testimonials. Here's what sets us apart:
+            {`Discover the Testiverse advantage and elevate your credibility with
+            an abundance of testimonials. Here's what sets us apart:`}
           </p>
 
           <div className="flex flex-col gap-4">
             <p className="flex items-start text-foreground/90 leading-snug gap-2">
               <CheckCircle className="stroke-purple-500 mt-0.5 w-5 h-5 flex-shrink-0" />
-              Craft your bespoke testimonial collection form in just 30 seconds.
+              {`Craft your bespoke testimonial collection form in just 30 seconds.
               Whether it's inviting participants, sharing the form, or
               seamlessly embedding it anywhere on your platform, Testiverse
-              simplifies the entire process.
+              simplifies the entire process.`}
             </p>
 
             <p className="flex items-start text-foreground/90 leading-snug gap-2">
@@ -83,10 +83,10 @@ export default async function Home() {
 
             <p className="flex items-start text-foreground/90 leading-snug gap-2">
               <CheckCircle className="stroke-purple-500 mt-0.5 w-5 h-5 flex-shrink-0" />
-              Take your testimonials to the next level with Testiverse's unique
+              {`Take your testimonials to the next level with Testiverse's unique
               engagement feature. Foster deeper connections with your customers
               by enabling them to share their experiences in a more interactive
-              and personalized manner.
+              and personalized manner.`}
             </p>
           </div>
 

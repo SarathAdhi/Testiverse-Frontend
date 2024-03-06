@@ -12,7 +12,7 @@ type Props = {
 const ShowcaseWallEditPage = async ({ params }: Props) => {
   const showcase_slug = params?.slug;
 
-  let showcase: ShowcaseTypeMongo | null = await fetchFunc.get(
+  let { data: showcase, error } = await fetchFunc.get<ShowcaseTypeMongo>(
     `/showcase/my/${showcase_slug}`,
     {
       cache: "no-store",

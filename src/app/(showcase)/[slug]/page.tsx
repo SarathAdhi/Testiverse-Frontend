@@ -21,16 +21,12 @@ type Props = {
 const ViewShowcasePage = async ({ params }: Props) => {
   const slug = params?.slug;
 
-  let showcase: ShowcaseTypeMongo | null = null;
-  let error = "";
-
-  try {
-    showcase = await fetchFunc.get(`/showcase/${slug}`, {
+  const { data: showcase, error } = await fetchFunc.get<ShowcaseTypeMongo>(
+    `/showcase/${slug}`,
+    {
       cache: "no-store",
-    });
-  } catch (_error) {
-    error = (_error as { message: string })?.message || (_error as string);
-  }
+    }
+  );
 
   if (!showcase) return <NotFoundPage reason={error} />;
 

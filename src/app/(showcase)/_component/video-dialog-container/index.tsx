@@ -24,7 +24,7 @@ const VideoDialogContainer = ({
   showcase,
   videoBtn,
 }: Props) => {
-  const webcamRef = useRef<Webcam>(null);
+  const webcamRef = useRef<Webcam | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 

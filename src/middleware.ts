@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   const res = NextResponse.next();
   let bearerToken = cookies().get("bearer-token")?.value;
 
-  let user: User | null = null;
+  let user: User | undefined = undefined;
 
   try {
     user = await fetchUser();

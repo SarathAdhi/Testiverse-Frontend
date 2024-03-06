@@ -19,33 +19,60 @@ const _fetch = async <T>(
   method: string,
   options?: RequestInit,
   returnFullResponse: boolean = false
-): Promise<T> => {
-  const response = await fetch(`${getServerBaseUrl()}${url}`, {
-    method,
-    ...options,
-    headers: getHeaders(),
-  });
+): Promise<{ data?: T; error?: string }> => {
+  const headers = getHeaders();
 
-  if (!response.ok) {
-    const errorData = await response.json();
+  try {
+    const response = await fetch(`${getServerBaseUrl()}${url}`, {
+      method,
+      ...options,
+      headers,
+    });
 
-    throw errorData?.message || errorData;
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw errorData?.message || errorData;
+    }
+
+    const responseData = await response.json();
+
+    if (returnFullResponse) {
+      return { data: responseData };
+    }
+
+    return { data: responseData.data };
+  } catch (error) {
+    return {
+      error:
+        (error as { message: string })?.message ||
+        (error as { detail: string })?.detail ||
+        "Unknown error occurred",
+    };
   }
-
-  const responseData = await response.json();
-
-  if (returnFullResponse) return responseData;
-
-  return responseData.data as T;
 };
 
 export const fetchFunc = {
-  get: <T>(url: string, options?: RequestInit): Promise<T> =>
-    _fetch<T>(url, "GET", options),
+  get: async <T>(
+    url: string,
+    options?: RequestInit
+  ): Promise<{ data?: T; error?: string }> => _fetch<T>(url, "GET", options),
 
-  post: <T>(url: string, body: any, options?: RequestInit): Promise<T> =>
-    _fetch<T>(url, "POST", { ...options, body: JSON.stringify(body) }),
+  post: async <T>(
+    url: string,
+    body: any,
+    options?: RequestInit,
+    returnFullResponse: boolean = false
+  ): Promise<{ data?: T; error?: string }> =>
+    _fetch<T>(
+      url,
+      "POST",
+      { ...options, body: JSON.stringify(body) },
+      returnFullResponse
+    ),
 
-  delete: <T>(url: string, options?: RequestInit): Promise<T> =>
+  delete: async <T>(
+    url: string,
+    options?: RequestInit
+  ): Promise<{ data?: T; error?: string }> =>
     _fetch<T>(url, "DELETE", options, true),
 };

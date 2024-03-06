@@ -27,44 +27,34 @@ const ShowcasePage = async ({ params, searchParams }: Props) => {
   const search = searchParams?.search || "";
   const view = searchParams?.view || "columns";
 
-  let showcase: ShowcaseTypeMongo | null = null;
+  let showcase: ShowcaseTypeMongo | undefined = undefined;
   let testimonials: TestimonialTypeMongo[] = [];
-  let testimonial: TestimonialTypeMongo | null = null;
+  let testimonial: TestimonialTypeMongo | undefined = undefined;
 
   let error;
 
-  try {
-    const [_showcase, _testimonials, _testimonial] = await Promise.all<
-      [
-        ShowcaseTypeMongo,
-        TestimonialTypeMongo[],
-        TestimonialTypeMongo | Promise<null>
-      ]
-    >([
-      await fetchFunc.get(`/showcase/my/${showcase_slug}`, {
+  const [{ data: _showcase }, { data: _testimonials }, { data: _testimonial }] =
+    await Promise.all([
+      await fetchFunc.get<ShowcaseTypeMongo>(`/showcase/my/${showcase_slug}`, {
         cache: "no-store",
       }),
 
-      await fetchFunc.get(
+      await fetchFunc.get<TestimonialTypeMongo[]>(
         `/testimonial/${showcase_slug}/all?type=${type}&search=${search}`,
         {
           cache: "no-store",
         }
       ),
       testimonial_id
-        ? fetchFunc.get(`/testimonial/${testimonial_id}`)
-        : Promise.resolve(null),
+        ? fetchFunc.get<TestimonialTypeMongo>(`/testimonial/${testimonial_id}`)
+        : Promise.resolve({ data: undefined } as { data: undefined }),
     ]);
 
-    showcase = _showcase;
+  showcase = _showcase;
 
-    testimonials = _testimonials;
+  testimonials = _testimonials || [];
 
-    testimonial = testimonial_id ? _testimonial : null;
-  } catch (_error) {
-    console.log(_error);
-    error = (_error as { message: string })?.message || (_error as string);
-  }
+  testimonial = testimonial_id ? _testimonial : undefined;
 
   if (!showcase) return <NotFoundPage reason={error} />;
 
