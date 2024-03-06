@@ -4,6 +4,6 @@ import { fetchFunc } from "./fetch";
 export async function fetchUser() {
   return fetchFunc
     .get("/auth/verify")
-    .then((res) => res as User)
-    .catch(() => undefined);
+    .then((res) => res.data as User)
+    .catch(() => null);
 }
