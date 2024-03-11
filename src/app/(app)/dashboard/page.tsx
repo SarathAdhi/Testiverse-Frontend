@@ -36,22 +36,28 @@ const DashboardPage = async () => {
           <h3>Overview</h3>
 
           <div className="grid sm:grid-cols-3 gap-4">
-            <div className="p-6 w-full grid place-content-center text-center bg-secondary rounded-lg">
-              <h5 className="leading-none mb-2">Text Testimonials</h5>
+            <div className="p-6 w-full grid place-content-center text-center border rounded-lg">
+              <h5 className="font-medium leading-none mb-2">
+                Text Testimonials
+              </h5>
 
-              <h4>{textTestimonials?.length}</h4>
+              <h3>{textTestimonials?.length}</h3>
             </div>
 
-            <div className="p-6 w-full grid place-content-center text-center bg-secondary rounded-lg">
-              <h5 className="leading-none mb-2">Videos Testimonials</h5>
+            <div className="p-6 w-full grid place-content-center text-center border rounded-lg">
+              <h5 className="font-medium leading-none mb-2">
+                Videos Testimonials
+              </h5>
 
-              <h4>{videoTestimonials?.length}</h4>
+              <h3>{videoTestimonials?.length}</h3>
             </div>
 
-            <div className="p-6 w-full grid place-content-center text-center bg-secondary rounded-lg">
-              <h5 className="leading-none mb-2">Total Testimonials</h5>
+            <div className="p-6 w-full grid place-content-center text-center border rounded-lg">
+              <h5 className="font-medium leading-none mb-2">
+                Total Testimonials
+              </h5>
 
-              <h4>{testimonials?.length}</h4>
+              <h3>{testimonials?.length}</h3>
             </div>
           </div>
         </div>

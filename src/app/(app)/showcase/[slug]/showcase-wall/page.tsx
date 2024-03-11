@@ -22,7 +22,7 @@ const ShowcaseWallEditPage = async ({ params }: Props) => {
   if (!showcase) return <NotFoundPage reason={"Showcase not found"} />;
 
   return (
-    <ShowcaseContainerWrapper {...showcase}>
+    <ShowcaseContainerWrapper className="p-4" {...showcase}>
       <p>ShowcaseWallEditPage</p>
     </ShowcaseContainerWrapper>
   );

@@ -7,11 +7,25 @@ import { Close } from "@radix-ui/react-popover";
 import { ShowcaseTypeMongo } from "@schemas/showcaseSchema";
 import { Button } from "@ui/button";
 import { deleteShowcase } from "app/actions";
-import { Pencil, ScrollText, Trash, Video } from "lucide-react";
+import {
+  CogIcon,
+  MoreVertical,
+  Pencil,
+  ScrollText,
+  Trash,
+  Video,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import MarkdownJSX from "./markdown-jsx";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@ui/dropdown-menu";
 
 type Props = ShowcaseTypeMongo & {
   testimonialCounts: {
@@ -37,16 +51,37 @@ const ShowcaseCard = ({
   )?.count;
 
   return (
-    <Card
-      className="relative duration-150 hover:scale-[1.02] ease-in-out active:scale-[0.98] cursor-pointer select-none"
-      onClick={() => {
-        push(`/showcase/${slug}`);
-      }}
-    >
-      <CardHeader className="">
-        <CardTitle>{name}</CardTitle>
+    <Card className="relative select-none">
+      <CardHeader className="space-y-4">
+        <div className="w-full flex items-center justify-between gap-4">
+          <CardTitle>{name}</CardTitle>
 
-        <div className="line-clamp-2">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                size="icon"
+                variant="outline"
+                className="size-8 rounded-full"
+              >
+                <MoreVertical className="stroke-foreground size-5" />
+              </Button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent sideOffset={8} align="end">
+              <DropdownMenuItem
+                onClick={() => {
+                  navigator.clipboard
+                    .writeText(`${window.location.origin}/showcase/${slug}`)
+                    .then(() => toast.success("Link Copied to Clipboard"));
+                }}
+              >
+                Get Link
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
+        <div className="line-clamp-2 [&_p]:!leading-none">
           <MarkdownJSX>{message}</MarkdownJSX>
         </div>
 
@@ -65,12 +100,21 @@ const ShowcaseCard = ({
         </div>
       </CardHeader>
 
-      {/* <CardContent><p>Card Content</p></CardContent> */}
-
-      <CardFooter className="grid grid-cols-2 gap-2">
+      <CardFooter className="grid grid-cols-3 gap-2">
         <Button onClick={(e) => e.stopPropagation()} asChild>
+          <Link href={`/showcase/${slug}`}>
+            <CogIcon className="stroke-background size-4 mr-2 flex-shrink-0" />
+            Manage
+          </Link>
+        </Button>
+
+        <Button
+          variant="secondary"
+          onClick={(e) => e.stopPropagation()}
+          asChild
+        >
           <Link href={`/showcase/${slug}/edit`}>
-            <Pencil className="stroke-background w-4 h-4 mr-2" />
+            <Pencil className="size-4 mr-2 flex-shrink-0" />
             Edit
           </Link>
         </Button>
@@ -78,7 +122,7 @@ const ShowcaseCard = ({
         <Popover>
           <PopoverTrigger onClick={(e) => e.stopPropagation()} asChild>
             <Button variant="destructive">
-              <Trash className="stroke-white w-4 h-4 mr-2" />
+              <Trash className="stroke-white size-4 mr-2 flex-shrink-0" />
               Delete
             </Button>
           </PopoverTrigger>

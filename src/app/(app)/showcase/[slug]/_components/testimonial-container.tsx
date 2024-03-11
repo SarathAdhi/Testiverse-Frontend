@@ -157,7 +157,6 @@ const TestimonialContainer = ({
                   activeFillColor: "#f59e0b",
                   inactiveFillColor: "#ffedd5",
                   inactiveStrokeColor: "#f59e0b",
-                  itemStrokeWidth: 1,
                 }}
                 readOnly
               />

@@ -11,24 +11,48 @@ const MarkdownJSX = ({ children }: Props) => {
         overrides: {
           h1: {
             component: "p",
+            props: {
+              className: "text-lg",
+            },
           },
           h2: {
             component: "p",
+            props: {
+              className: "text-lg",
+            },
           },
           h3: {
             component: "p",
+            props: {
+              className: "text-lg",
+            },
           },
           h4: {
             component: "p",
+            props: {
+              className: "text-lg",
+            },
           },
           h5: {
             component: "p",
+            props: {
+              className: "text-lg",
+            },
           },
           h6: {
             component: "p",
+            props: {
+              className: "text-lg",
+            },
           },
           span: {
-            component: "span",
+            component: "p",
+            props: {
+              className: "text-lg",
+            },
+          },
+          p: {
+            component: "p",
             props: {
               className: "text-lg",
             },

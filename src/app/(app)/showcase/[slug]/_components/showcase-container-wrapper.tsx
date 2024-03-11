@@ -2,6 +2,7 @@
 
 import { Badge } from "@ui/badge";
 import { Button } from "@ui/button";
+import { cn } from "@utils/cn";
 import { frontendUrl } from "@utils/constants";
 import { Pencil } from "lucide-react";
 import Link from "next/link";
@@ -14,11 +15,13 @@ const ShowcaseContainerWrapper = ({
   name,
   slug,
   children,
+  className,
 }: {
   isDarkTheme: boolean;
   name: string;
   slug: string;
   children: ReactNode;
+  className?: string;
 }) => {
   const searchParams = useSearchParams();
 
@@ -64,7 +67,11 @@ const ShowcaseContainerWrapper = ({
           }}
         />
 
-        <div className="w-full h-[200vh] flex flex-col gap-0.5">{children}</div>
+        <div
+          className={cn("w-full h-[200vh] flex flex-col gap-0.5", className)}
+        >
+          {children}
+        </div>
       </section>
     </div>
   );

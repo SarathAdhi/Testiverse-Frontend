@@ -1,4 +1,7 @@
-import React from "react";
+import { Rating, ThinRoundedStar } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
+import { cn } from "@utils/cn";
+import { Control, FieldValues } from "react-hook-form";
 import {
   FormControl,
   FormDescription,
@@ -7,10 +10,6 @@ import {
   FormLabel,
   FormMessage,
 } from "./form";
-import { cn } from "@utils/cn";
-import { Rating, ThinRoundedStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import { Control, FieldValues } from "react-hook-form";
 
 export interface Props {
   label?: string;
