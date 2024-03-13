@@ -71,7 +71,7 @@ const QuestionsDnd = ({ control }: Props) => {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           style={getItemStyle(provided.draggableProps.style)}
-                          className="pd flex flex-col gap-4 rounded-md"
+                          className="flex flex-col gap-4 rounded-md"
                         >
                           <div className="flex items-center justify-between gap-2">
                             <div

@@ -46,6 +46,7 @@ const ShowcaseCard = ({
   const videoTestimonialCount = testimonialCounts.find(
     ({ type }) => type === "video"
   )?.count;
+
   const textTestimonialCount = testimonialCounts.find(
     ({ type }) => type === "text"
   )?.count;
@@ -71,7 +72,7 @@ const ShowcaseCard = ({
               <DropdownMenuItem
                 onClick={() => {
                   navigator.clipboard
-                    .writeText(`${window.location.origin}/showcase/${slug}`)
+                    .writeText(`${window.location.origin}/${slug}`)
                     .then(() => toast.success("Link Copied to Clipboard"));
                 }}
               >

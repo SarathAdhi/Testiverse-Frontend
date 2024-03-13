@@ -37,12 +37,13 @@ const _fetch = async <T>(
     const responseData = await response.json();
 
     if (returnFullResponse) {
-      return { data: responseData };
+      return { data: responseData, error: "" };
     }
 
-    return { data: responseData.data };
+    return { data: responseData.data, error: "" };
   } catch (error) {
     return {
+      data: undefined,
       error:
         (error as { message: string })?.message ||
         (error as { detail: string })?.detail ||

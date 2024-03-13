@@ -19,8 +19,10 @@ const DashboardPage = async () => {
   let testimonials: TestimonialTypeMongo[] | undefined = undefined;
 
   const [{ data: _showcases }, { data: _testimonials }] = await Promise.all([
-    await fetchFunc.get<Showcase[]>("/showcase/my"),
-    await fetchFunc.get<TestimonialTypeMongo[]>("/testimonial/all"),
+    await fetchFunc.get<Showcase[]>("/showcase/my", { cache: "no-store" }),
+    await fetchFunc.get<TestimonialTypeMongo[]>("/testimonial/all", {
+      cache: "no-store",
+    }),
   ]);
 
   showcases = _showcases;

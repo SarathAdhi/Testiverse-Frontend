@@ -1,1 +1,1 @@
-export const frontendUrl = "localhost:3000";
+export const frontendUrl = process.env.NEXT_PUBLIC_FRONTEND_URL;

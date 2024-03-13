@@ -8,7 +8,7 @@ export async function deleteShowcase(_id: string) {
   try {
     const response = await fetchFunc.delete<ReturnResponse>(`/showcase/${_id}`);
 
-    return { message: response as string, error: "" };
+    return { message: response?.data?.message as string, error: "" };
   } catch (_error) {
     const error =
       (_error as ReturnResponse)?.message ||
