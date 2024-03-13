@@ -29,7 +29,7 @@ const TopActionItems = ({
   const { modifySearchParams } = UseSearchParamsHandler();
 
   return (
-    <div className="py-4 bg-background z-40 sticky top-[55px] sm:top-[72px] flex items-center gap-2 sm:gap-4">
+    <div className="p-4 bg-background z-40 sticky top-[55px] sm:top-[72px] flex items-center gap-2 sm:gap-4">
       <Button
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         variant="ghost"

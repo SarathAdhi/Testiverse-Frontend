@@ -58,7 +58,7 @@ const ShowcaseContainerWrapper = ({
         </section>
       </div>
 
-      <section className="p-0 w-full relative flex items-start gap-8">
+      <section className="p-0 w-full relative flex items-start">
         <ShowcaseSidebar
           {...{
             type: searchParams.get("type")!,
@@ -67,9 +67,7 @@ const ShowcaseContainerWrapper = ({
           }}
         />
 
-        <div
-          className={cn("w-full h-[200vh] flex flex-col gap-0.5", className)}
-        >
+        <div className={cn("w-full flex flex-col gap-0.5", className)}>
           {children}
         </div>
       </section>
